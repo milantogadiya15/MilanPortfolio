@@ -4,193 +4,1196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Milan Togadiya Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="admin.css">
-    <!-- Security protection -->
-    <script src="security.js"></script>
+    <title>Admin Panel – Milan Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #10b981;
+            --accent2: #6366f1;
+            --text: #e6edf3;
+            --text-muted: rgba(255, 255, 255, 0.45);
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* ── Header ── */
+        .admin-header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .admin-header h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .admin-header .back-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .admin-header .back-link:hover {
+            color: var(--text);
+        }
+
+        /* ── Layout ── */
+        .admin-main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* ── Login Card ── */
+        #loginSection {
+            max-width: 480px;
+            margin: 4rem auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+        }
+
+        #loginSection h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.4rem;
+        }
+
+        #loginSection p.sub {
+            color: var(--text-muted);
+            font-size: 0.84rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .token-help {
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 8px;
+            padding: 0.9rem 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        .token-help a {
+            color: var(--accent2);
+            text-decoration: none;
+        }
+
+        /* ── Form Elements ── */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.65rem 0.9rem;
+            color: var(--text);
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .form-group textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .form-group select option {
+            background: #1a2030;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* ── Buttons ── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #0ea472;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.13);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+            padding: 0.75rem;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ── Dashboard ── */
+        #dashboardSection {
+            display: none;
+        }
+
+        .dash-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .dash-top h2 {
+            font-size: 1.25rem;
+        }
+
+        .config-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 20px;
+            padding: 0.35rem 0.9rem;
+            font-size: 0.78rem;
+            color: var(--accent);
+        }
+
+        /* ── Project List ── */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .project-row {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .project-row img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+            background: #222;
+        }
+
+        .project-row-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .project-row-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .project-row-info p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        .project-row-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.15rem 0.55rem;
+            border-radius: 10px;
+            font-size: 0.68rem;
+            font-weight: 600;
+        }
+
+        .status-published {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--accent);
+        }
+
+        .status-development {
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--warning);
+        }
+
+        /* ── Modal ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 2rem 1rem;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 680px;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.1rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.3rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 0.7rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ── File Upload ── */
+        .file-upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            position: relative;
+        }
+
+        .file-upload-area:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .file-upload-area input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .file-upload-area i {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .file-upload-area p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .file-upload-area span {
+            font-size: 0.75rem;
+            color: var(--accent);
+            display: block;
+            margin-top: 0.3rem;
+        }
+
+        .file-preview {
+            margin-top: 0.7rem;
+        }
+
+        .file-preview img,
+        .file-preview video {
+            max-width: 100%;
+            max-height: 120px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        /* ── Toast ── */
+        #toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            max-width: 360px;
+        }
+
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #toast.success {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        #toast.error {
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        #toast i.success-icon {
+            color: var(--accent);
+        }
+
+        #toast i.error-icon {
+            color: var(--danger);
+        }
+
+        /* ── Progress ── */
+        .upload-progress {
+            margin-top: 0.5rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .progress-bar-wrap {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            margin-top: 0.4rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.3s;
+            border-radius: 4px;
+        }
+
+        /* ── Tag Input ── */
+        .tags-input-wrap {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .tag-chip {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .tag-chip button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 0;
+            font-size: 0.7rem;
+        }
+
+        /* ── Category Checkboxes ── */
+        .category-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.4rem;
+        }
+
+        .cat-checkbox label {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.3rem 0.7rem;
+            cursor: pointer;
+            font-size: 0.78rem;
+            transition: all 0.2s;
+        }
+
+        .cat-checkbox input {
+            display: none;
+        }
+
+        .cat-checkbox input:checked+label {
+            background: rgba(16, 185, 129, 0.12);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .project-row {
+                flex-wrap: wrap;
+            }
+
+            .dash-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Login Screen -->
-    <div id="loginScreen" class="login-wrapper">
-        <div class="login-card">
-            <div class="login-logo">
-                <div class="logo-icon"><i class="fas fa-shield-alt"></i></div>
-                <h1>Admin Panel</h1>
-                <p>Milan Togadiya Portfolio</p>
+    <header class="admin-header">
+        <h1><i class="fas fa-gamepad"></i> Portfolio Admin</h1>
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> View Portfolio</a>
+    </header>
+
+    <!-- ══════════════ LOGIN ══════════════ -->
+    <div id="loginSection">
+        <h2><i class="fab fa-github" style="color:#6366f1;margin-right:0.4rem"></i> GitHub Login</h2>
+        <p class="sub">Connect your GitHub account so the admin panel can save project data and upload files directly to
+            your repository.</p>
+
+        <div class="token-help">
+            <i class="fas fa-info-circle" style="color:#6366f1;margin-right:0.4rem"></i>
+            <strong>How to get a PAT:</strong><br>
+            Go to <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> → Generate
+            new token (classic) → Select <code>repo</code> scope → Copy the token.
+        </div>
+
+        <div class="form-group">
+            <label>GitHub Username (Owner)</label>
+            <input type="text" id="ghOwner" placeholder="milantogadiya15" value="milantogadiya15">
+        </div>
+        <div class="form-group">
+            <label>Repository Name</label>
+            <input type="text" id="ghRepo" placeholder="MilanPortfolio" value="MilanPortfolio">
+        </div>
+        <div class="form-group">
+            <label>Branch</label>
+            <input type="text" id="ghBranch" placeholder="main" value="main">
+        </div>
+        <div class="form-group">
+            <label>Personal Access Token (PAT)</label>
+            <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+        </div>
+        <button class="btn btn-primary btn-full" onclick="login()">
+            <i class="fas fa-sign-in-alt"></i> Connect & Load Projects
+        </button>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin-top:1rem;text-align:center;">
+            <i class="fas fa-lock" style="margin-right:0.3rem"></i> Your token is stored only in this browser session
+            and never sent anywhere except GitHub's API.
+        </p>
+    </div>
+
+    <!-- ══════════════ DASHBOARD ══════════════ -->
+    <div id="dashboardSection" class="admin-main">
+        <div class="dash-top">
+            <div>
+                <h2>Projects</h2>
+                <p style="color:var(--text-muted);font-size:0.84rem;margin-top:0.2rem">Manage your portfolio projects
+                </p>
             </div>
-            <form id="loginForm">
-                <div class="input-group">
-                    <span class="input-icon"><i class="fas fa-lock"></i></span>
-                    <input type="password" id="adminPassword" placeholder="Enter admin password" autocomplete="off">
-                </div>
-                <button type="submit" class="login-btn">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </button>
-                <p id="loginError" class="login-error hidden">❌ Wrong password. Try again.</p>
-            </form>
+            <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap;">
+                <span class="config-badge" id="repoBadge"><i class="fab fa-github"></i> <span
+                        id="badgeText"></span></span>
+                <button class="btn btn-secondary" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                <button class="btn btn-primary" onclick="openAddModal()"><i class="fas fa-plus"></i> Add
+                    Project</button>
+            </div>
+        </div>
+        <div class="project-list" id="projectList">
+            <p style="color:var(--text-muted);text-align:center;padding:3rem;">Loading projects…</p>
         </div>
     </div>
 
-    <!-- Admin Dashboard -->
-    <div id="dashboard" class="dashboard hidden">
-
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="admin-avatar"><i class="fas fa-user-shield"></i></div>
-                <div class="admin-info">
-                    <h3>Milan Togadiya</h3>
-                    <span class="admin-badge">Administrator</span>
-                </div>
-            </div>
-            <nav class="sidebar-nav">
-                <a href="#" class="nav-item active" data-tab="messages">
-                    <i class="fas fa-envelope"></i>
-                    <span>Messages</span>
-                    <span class="badge" id="unreadBadge">0</span>
-                </a>
-                <a href="#" class="nav-item" data-tab="stats">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>Statistics</span>
-                </a>
-                <a href="index.html" class="nav-item" target="_blank">
-                    <i class="fas fa-external-link-alt"></i>
-                    <span>View Portfolio</span>
-                </a>
-            </nav>
-            <div class="sidebar-footer">
-                <button id="logoutBtn" class="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="dashboard-header">
-                <div class="header-left">
-                    <h2 id="pageTitle">📬 Messages</h2>
-                </div>
-                <div class="header-right">
-                    <button id="markAllReadBtn" class="action-btn secondary">
-                        <i class="fas fa-check-double"></i> Mark All Read
-                    </button>
-                    <button id="clearAllBtn" class="action-btn danger">
-                        <i class="fas fa-trash"></i> Clear All
-                    </button>
-                </div>
-            </header>
-
-            <!-- Messages Tab -->
-            <div id="messagesTab" class="tab-content active">
-                <!-- Search/Filter -->
-                <div class="filter-bar">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Search messages...">
-                    </div>
-                    <div class="filter-buttons">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="unread">Unread</button>
-                        <button class="filter-btn" data-filter="read">Read</button>
-                    </div>
-                </div>
-
-                <!-- Messages List -->
-                <div id="messagesList" class="messages-list">
-                    <!-- populated by JS -->
-                </div>
-
-                <!-- Empty State -->
-                <div id="emptyState" class="empty-state hidden">
-                    <div class="empty-icon"><i class="fas fa-inbox"></i></div>
-                    <h3>No messages yet</h3>
-                    <p>When someone contacts you through your portfolio, messages will appear here.</p>
-                </div>
-            </div>
-
-            <!-- Stats Tab -->
-            <div id="statsTab" class="tab-content">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon total"><i class="fas fa-envelope"></i></div>
-                        <div class="stat-info">
-                            <h3 id="statTotal">0</h3>
-                            <p>Total Messages</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon unread"><i class="fas fa-envelope-open"></i></div>
-                        <div class="stat-info">
-                            <h3 id="statUnread">0</h3>
-                            <p>Unread</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon read"><i class="fas fa-check-circle"></i></div>
-                        <div class="stat-info">
-                            <h3 id="statRead">0</h3>
-                            <p>Read</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon today"><i class="fas fa-calendar-day"></i></div>
-                        <div class="stat-info">
-                            <h3 id="statToday">0</h3>
-                            <p>Today</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="recent-list-section">
-                    <h3>📋 Recent Senders</h3>
-                    <div id="recentSenders"></div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Message Detail Modal -->
-    <div id="messageModal" class="modal-overlay hidden">
-        <div class="modal-card">
+    <!-- ══════════════ ADD/EDIT MODAL ══════════════ -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal">
             <div class="modal-header">
-                <div class="modal-sender-info">
-                    <div class="sender-avatar" id="modalAvatar">M</div>
-                    <div>
-                        <h3 id="modalName"></h3>
-                        <p id="modalEmail"></p>
+                <h3 id="modalTitle">Add New Project</h3>
+                <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            </div>
+
+            <input type="hidden" id="editIndex" value="-1">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Project Title *</label>
+                    <input type="text" id="fTitle" placeholder="e.g. Save The Dog">
+                </div>
+                <div class="form-group">
+                    <label>Type / Genre *</label>
+                    <input type="text" id="fType" placeholder="e.g. 2D · Hyper Casual">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Platform</label>
+                    <select id="fPlatform">
+                        <option value="Android">Android</option>
+                        <option value="iOS">iOS</option>
+                        <option value="Android & iOS">Android & iOS</option>
+                        <option value="PC">PC</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Engine</label>
+                    <select id="fEngine">
+                        <option value="Unity">Unity</option>
+                        <option value="Unreal">Unreal</option>
+                        <option value="Godot">Godot</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <select id="fStatus">
+                    <option value="published">Published</option>
+                    <option value="development">In Development</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Description *</label>
+                <textarea id="fDesc" placeholder="Describe what the game is about…"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Categories (select all that apply)</label>
+                <div class="category-grid">
+                    <div class="cat-checkbox"><input type="checkbox" id="cat-casual" value="casual"><label
+                            for="cat-casual">Casual</label></div>
+                    <div class="cat-checkbox"><input type="checkbox" id="cat-hyper" value="hyper-casual"><label
+                            for="cat-hyper">Hyper Casual</label></div>
+                    <div class="cat-checkbox"><input type="checkbox" id="cat-action" value="action"><label
+                            for="cat-action">Action</label></div>
+                    <div class="cat-checkbox"><input type="checkbox" id="cat-puzzle" value="puzzle"><label
+                            for="cat-puzzle">Puzzle</label></div>
+                    <div class="cat-checkbox"><input type="checkbox" id="cat-strategy" value="strategy"><label
+                            for="cat-strategy">Strategy</label></div>
+                    <div class="cat-checkbox"><input type="checkbox" id="cat-word" value="word"><label
+                            for="cat-word">Word Game</label></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Tags (press Enter to add)</label>
+                <input type="text" id="fTagInput" placeholder="e.g. Unity   [Press Enter]" onkeydown="addTag(event)">
+                <div class="tags-input-wrap" id="tagsWrap"></div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Play Store URL (optional)</label>
+                    <input type="url" id="fPlayStore" placeholder="https://play.google.com/…">
+                </div>
+                <div class="form-group">
+                    <label>App Store URL (optional)</label>
+                    <input type="url" id="fAppStore" placeholder="https://apps.apple.com/…">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <!-- Image Upload -->
+                <div class="form-group">
+                    <label>Project Image (thumbnail)</label>
+                    <div class="file-upload-area" id="imgUploadArea">
+                        <input type="file" id="fImage" accept="image/*"
+                            onchange="previewFile('fImage','imgPreview','img')">
+                        <i class="fas fa-image"></i>
+                        <p>Click or drag to upload</p>
+                        <span id="imgFileName">No file chosen</span>
                     </div>
+                    <div class="file-preview" id="imgPreview"></div>
+                    <div class="upload-progress" id="imgProgress">
+                        <span id="imgProgressText">Uploading image…</span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" id="imgProgressBar"></div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="fImagePath">
                 </div>
-                <button id="closeModal" class="close-btn"><i class="fas fa-times"></i></button>
+
+                <!-- Video Upload -->
+                <div class="form-group">
+                    <label>Gameplay Video (mp4, optional)</label>
+                    <div class="file-upload-area" id="vidUploadArea">
+                        <input type="file" id="fVideo" accept="video/mp4,video/*"
+                            onchange="previewFile('fVideo','vidPreview','video')">
+                        <i class="fas fa-video"></i>
+                        <p>Click or drag to upload</p>
+                        <span id="vidFileName">No file chosen</span>
+                    </div>
+                    <div class="file-preview" id="vidPreview"></div>
+                    <div class="upload-progress" id="vidProgress">
+                        <span id="vidProgressText">Uploading video…</span>
+                        <div class="progress-bar-wrap">
+                            <div class="progress-bar" id="vidProgressBar"></div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="fVideoPath">
+                </div>
             </div>
-            <div class="modal-body">
-                <div class="modal-meta">
-                    <span><i class="fas fa-tag"></i> <strong>Project Type:</strong> <span
-                            id="modalSubject"></span></span>
-                    <span><i class="fas fa-clock"></i> <span id="modalDate"></span></span>
-                </div>
-                <div class="modal-message">
-                    <h4>Message:</h4>
-                    <p id="modalMessage"></p>
-                </div>
-            </div>
+
             <div class="modal-footer">
-                <a id="modalReplyBtn" href="#" class="action-btn primary" target="_blank">
-                    <i class="fas fa-reply"></i> Reply via Email
-                </a>
-                <button id="modalDeleteBtn" class="action-btn danger">
-                    <i class="fas fa-trash"></i> Delete
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" id="saveBtn" onclick="saveProject()">
+                    <i class="fas fa-save"></i> Save Project
                 </button>
             </div>
         </div>
     </div>
 
-    <script src="admin.js"></script>
+    <!-- ══════════════ DELETE CONFIRM ══════════════ -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal" style="max-width:400px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-trash" style="color:var(--danger);margin-right:0.5rem"></i> Delete Project</h3>
+                <button class="modal-close" onclick="closeDeleteModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <p style="color:var(--text-muted);font-size:0.9rem;">Are you sure you want to delete <strong
+                    id="deleteProjectName"></strong>? This cannot be undone.</p>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn"><i class="fas fa-trash"></i> Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast"><i id="toastIcon"></i> <span id="toastMsg"></span></div>
+
+    <script>
+        // ── Config ──────────────────────────────────────────────────────────
+        let GH = { owner: '', repo: '', branch: 'main', token: '' };
+        let projectsData = [];
+        let tags = [];
+        let currentSHA = '';   // SHA of projects.json (needed for updates)
+        let deleteIdx = -1;
+
+        // ── Login ─────────────────────────────────────────────────────────
+        async function login() {
+            GH.owner = document.getElementById('ghOwner').value.trim();
+            GH.repo = document.getElementById('ghRepo').value.trim();
+            GH.branch = document.getElementById('ghBranch').value.trim() || 'main';
+            GH.token = document.getElementById('ghToken').value.trim();
+
+            if (!GH.owner || !GH.repo || !GH.token) {
+                toast('Fill in all fields', 'error'); return;
+            }
+
+            try {
+                await loadProjectsFromGH();
+                sessionStorage.setItem('ghConfig', JSON.stringify(GH));
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+                document.getElementById('badgeText').textContent = `${GH.owner}/${GH.repo}`;
+                renderProjectList();
+                toast('Connected successfully!', 'success');
+            } catch (e) {
+                toast('Connection failed. Check your token and repo name.', 'error');
+                console.error(e);
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('ghConfig');
+            GH = { owner: '', repo: '', branch: 'main', token: '' };
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('dashboardSection').style.display = 'none';
+        }
+
+        // Check saved session
+        (function () {
+            const saved = sessionStorage.getItem('ghConfig');
+            if (saved) {
+                GH = JSON.parse(saved);
+                document.getElementById('ghOwner').value = GH.owner;
+                document.getElementById('ghRepo').value = GH.repo;
+                document.getElementById('ghBranch').value = GH.branch;
+                document.getElementById('ghToken').value = GH.token;
+                login();
+            }
+        })();
+
+        // ── GitHub API Helpers ───────────────────────────────────────────
+        const ghAPI = (path, method = 'GET', body = null) => fetch(
+            `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${path}`,
+            {
+                method,
+                headers: {
+                    'Authorization': `token ${GH.token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: body ? JSON.stringify(body) : null
+            }
+        );
+
+        async function loadProjectsFromGH() {
+            const res = await ghAPI('projects.json');
+            if (!res.ok) throw new Error(await res.text());
+            const data = await res.json();
+            currentSHA = data.sha;
+            const decoded = atob(data.content.replace(/\n/g, ''));
+            projectsData = JSON.parse(decoded).projects || [];
+        }
+
+        async function saveProjectsToGH() {
+            const json = JSON.stringify({ projects: projectsData }, null, 2);
+            const encoded = btoa(unescape(encodeURIComponent(json)));
+            const body = {
+                message: 'Update projects.json via admin panel',
+                content: encoded,
+                sha: currentSHA,
+                branch: GH.branch
+            };
+            const res = await ghAPI('projects.json', 'PUT', body);
+            if (!res.ok) throw new Error(await res.text());
+            const data = await res.json();
+            currentSHA = data.content.sha;
+        }
+
+        async function uploadFileToGH(filePath, base64Content, existingSHA = null) {
+            const body = {
+                message: `Upload ${filePath} via admin panel`,
+                content: base64Content,
+                branch: GH.branch
+            };
+            if (existingSHA) body.sha = existingSHA;
+
+            const res = await ghAPI(filePath, 'PUT', body);
+            if (!res.ok) throw new Error(await res.text());
+            return res.json();
+        }
+
+        // Get existing file SHA (for updates)
+        async function getFileSHA(path) {
+            const res = await ghAPI(path);
+            if (res.status === 404) return null;
+            const data = await res.json();
+            return data.sha || null;
+        }
+
+        // Convert file to base64
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const b64 = reader.result.split(',')[1];
+                    resolve(b64);
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // ── Render Project List ─────────────────────────────────────────
+        function renderProjectList() {
+            const list = document.getElementById('projectList');
+            if (!projectsData.length) {
+                list.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:3rem;">No projects yet. Click "Add Project" to get started!</p>';
+                return;
+            }
+            list.innerHTML = projectsData.map((p, i) => `
+        <div class="project-row">
+            <img src="${p.image || ''}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/64x64/1a2030/10b981?text=🎮'">
+            <div class="project-row-info">
+                <h4>${p.title}</h4>
+                <p>${p.type} &bull; <span class="status-badge status-${p.status}">${p.status === 'published' ? 'Published' : 'In Development'}</span></p>
+                <p style="margin-top:0.3rem;font-size:0.76rem;color:var(--text-muted);">${(p.categories || []).join(', ')}</p>
+            </div>
+            <div class="project-row-actions">
+                <button class="btn btn-secondary" onclick="openEditModal(${i})" title="Edit"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger" onclick="openDeleteModal(${i})" title="Delete"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>
+    `).join('');
+        }
+
+        // ── Tags ─────────────────────────────────────────────────────────
+        function addTag(e) {
+            if (e.key !== 'Enter') return;
+            e.preventDefault();
+            const val = document.getElementById('fTagInput').value.trim();
+            if (val && !tags.includes(val)) {
+                tags.push(val);
+                renderTags();
+            }
+            document.getElementById('fTagInput').value = '';
+        }
+
+        function removeTag(tag) {
+            tags = tags.filter(t => t !== tag);
+            renderTags();
+        }
+
+        function renderTags() {
+            document.getElementById('tagsWrap').innerHTML = tags.map(t =>
+                `<span class="tag-chip">${t}<button onclick="removeTag('${t}')"><i class="fas fa-times"></i></button></span>`
+            ).join('');
+        }
+
+        // ── File Preview ─────────────────────────────────────────────────
+        function previewFile(inputId, previewId, type) {
+            const file = document.getElementById(inputId).files[0];
+            if (!file) return;
+            const nameEl = document.getElementById(inputId === 'fImage' ? 'imgFileName' : 'vidFileName');
+            nameEl.textContent = file.name;
+            const preview = document.getElementById(previewId);
+            const url = URL.createObjectURL(file);
+            preview.innerHTML = type === 'img'
+                ? `<img src="${url}" alt="preview">`
+                : `<video src="${url}" controls muted style="max-width:100%;max-height:120px;border-radius:8px;"></video>`;
+        }
+
+        // ── Add/Edit Modal ───────────────────────────────────────────────
+        function openAddModal() {
+            document.getElementById('modalTitle').textContent = 'Add New Project';
+            document.getElementById('editIndex').value = '-1';
+            clearForm();
+            document.getElementById('projectModal').classList.add('open');
+        }
+
+        function openEditModal(idx) {
+            const p = projectsData[idx];
+            document.getElementById('modalTitle').textContent = 'Edit Project';
+            document.getElementById('editIndex').value = idx;
+
+            document.getElementById('fTitle').value = p.title || '';
+            document.getElementById('fType').value = p.type || '';
+            document.getElementById('fDesc').value = p.description || '';
+            document.getElementById('fPlatform').value = p.platform || 'Android';
+            document.getElementById('fEngine').value = p.engine || 'Unity';
+            document.getElementById('fStatus').value = p.status || 'published';
+            document.getElementById('fPlayStore').value = p.playStoreUrl || '';
+            document.getElementById('fAppStore').value = p.appStoreUrl || '';
+            document.getElementById('fImagePath').value = p.image || '';
+            document.getElementById('fVideoPath').value = p.video || '';
+
+            // Categories
+            document.querySelectorAll('.cat-checkbox input').forEach(cb => {
+                cb.checked = (p.categories || []).includes(cb.value);
+            });
+
+            // Tags
+            tags = [...(p.tags || [])];
+            renderTags();
+
+            // Show current image/video
+            if (p.image) document.getElementById('imgPreview').innerHTML = `<img src="${p.image}" alt="current">`;
+            if (p.video) document.getElementById('vidPreview').innerHTML = `<video src="${p.video}" muted controls style="max-width:100%;max-height:120px;border-radius:8px;"></video>`;
+
+            document.getElementById('projectModal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').classList.remove('open');
+            clearForm();
+        }
+
+        function clearForm() {
+            ['fTitle', 'fType', 'fDesc', 'fPlayStore', 'fAppStore', 'fImagePath', 'fVideoPath'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            document.getElementById('fPlatform').value = 'Android';
+            document.getElementById('fEngine').value = 'Unity';
+            document.getElementById('fStatus').value = 'published';
+            document.getElementById('fImage').value = '';
+            document.getElementById('fVideo').value = '';
+            document.getElementById('imgPreview').innerHTML = '';
+            document.getElementById('vidPreview').innerHTML = '';
+            document.getElementById('imgFileName').textContent = 'No file chosen';
+            document.getElementById('vidFileName').textContent = 'No file chosen';
+            document.querySelectorAll('.cat-checkbox input').forEach(cb => cb.checked = false);
+            tags = [];
+            renderTags();
+        }
+
+        // ── Save Project ─────────────────────────────────────────────────
+        async function saveProject() {
+            const title = document.getElementById('fTitle').value.trim();
+            const desc = document.getElementById('fDesc').value.trim();
+            if (!title || !desc) { toast('Title and description are required', 'error'); return; }
+
+            const btn = document.getElementById('saveBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving…';
+
+            try {
+                const idx = parseInt(document.getElementById('editIndex').value);
+                const isNew = idx === -1;
+
+                const imageFile = document.getElementById('fImage').files[0];
+                const videoFile = document.getElementById('fVideo').files[0];
+
+                let imagePath = document.getElementById('fImagePath').value;
+                let videoPath = document.getElementById('fVideoPath').value;
+
+                // Generate ID
+                const id = isNew
+                    ? 'project-' + Date.now()
+                    : (projectsData[idx].id || 'project-' + Date.now());
+
+                // ── Upload Image ──
+                if (imageFile) {
+                    showProgress('img', 'Uploading image…');
+                    const ext = imageFile.name.split('.').pop();
+                    const fname = `assets/icons/${id}.${ext}`;
+                    const b64 = await fileToBase64(imageFile);
+                    const existingSHA = await getFileSHA(fname);
+                    animateProgress('imgProgressBar', 60);
+                    await uploadFileToGH(fname, b64, existingSHA);
+                    animateProgress('imgProgressBar', 100);
+                    imagePath = fname;
+                    hideProgress('img');
+                }
+
+                // ── Upload Video ──
+                if (videoFile) {
+                    showProgress('vid', 'Uploading video… (may take a moment)');
+                    const fname = `assets/videos/${id}.mp4`;
+                    const b64 = await fileToBase64(videoFile);
+                    const existingSHA = await getFileSHA(fname);
+                    animateProgress('vidProgressBar', 60);
+                    await uploadFileToGH(fname, b64, existingSHA);
+                    animateProgress('vidProgressBar', 100);
+                    videoPath = fname;
+                    hideProgress('vid');
+                }
+
+                // ── Build Project Object ──
+                const categories = Array.from(
+                    document.querySelectorAll('.cat-checkbox input:checked')
+                ).map(cb => cb.value);
+
+                const project = {
+                    id,
+                    title,
+                    type: document.getElementById('fType').value.trim(),
+                    platform: document.getElementById('fPlatform').value,
+                    engine: document.getElementById('fEngine').value,
+                    status: document.getElementById('fStatus').value,
+                    categories,
+                    description: desc,
+                    image: imagePath,
+                    video: videoPath,
+                    tags: [...tags],
+                    playStoreUrl: document.getElementById('fPlayStore').value.trim(),
+                    appStoreUrl: document.getElementById('fAppStore').value.trim()
+                };
+
+                if (isNew) {
+                    projectsData.push(project);
+                } else {
+                    projectsData[idx] = project;
+                }
+
+                // ── Save projects.json ──
+                await saveProjectsToGH();
+                renderProjectList();
+                closeModal();
+                toast(isNew ? 'Project added successfully!' : 'Project updated!', 'success');
+            } catch (e) {
+                toast('Error: ' + e.message, 'error');
+                console.error(e);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-save"></i> Save Project';
+            }
+        }
+
+        // ── Delete ───────────────────────────────────────────────────────
+        function openDeleteModal(idx) {
+            deleteIdx = idx;
+            document.getElementById('deleteProjectName').textContent = projectsData[idx].title;
+            document.getElementById('deleteModal').classList.add('open');
+            document.getElementById('confirmDeleteBtn').onclick = confirmDelete;
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.remove('open');
+            deleteIdx = -1;
+        }
+
+        async function confirmDelete() {
+            const btn = document.getElementById('confirmDeleteBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting…';
+            try {
+                projectsData.splice(deleteIdx, 1);
+                await saveProjectsToGH();
+                renderProjectList();
+                closeDeleteModal();
+                toast('Project deleted.', 'success');
+            } catch (e) {
+                toast('Delete failed: ' + e.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-trash"></i> Delete';
+            }
+        }
+
+        // ── Progress Helpers ─────────────────────────────────────────────
+        function showProgress(type, msg) {
+            const el = document.getElementById(type + 'Progress');
+            document.getElementById(type + 'ProgressText').textContent = msg;
+            document.getElementById(type + 'ProgressBar').style.width = '10%';
+            el.style.display = 'block';
+        }
+        function animateProgress(barId, pct) {
+            document.getElementById(barId).style.width = pct + '%';
+        }
+        function hideProgress(type) {
+            setTimeout(() => {
+                document.getElementById(type + 'Progress').style.display = 'none';
+                document.getElementById(type + 'ProgressBar').style.width = '0%';
+            }, 800);
+        }
+
+        // ── Toast ────────────────────────────────────────────────────────
+        function toast(msg, type = 'success') {
+            const el = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            el.className = `show ${type}`;
+            icon.className = type === 'success' ? 'fas fa-check-circle success-icon' : 'fas fa-exclamation-circle error-icon';
+            document.getElementById('toastMsg').textContent = msg;
+            setTimeout(() => el.classList.remove('show'), 3500);
+        }
+
+        // Close modals on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', e => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('open');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

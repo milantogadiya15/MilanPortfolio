@@ -1,0 +1,152 @@
+{
+    "projects": [
+        {
+            "id": "project-2",
+            "title": "Save The Dog",
+            "type": "2D · Hyper Casual",
+            "platform": "Android",
+            "engine": "Unity",
+            "status": "published",
+            "categories": [
+                "hyper-casual",
+                "puzzle"
+            ],
+            "description": "Draw a single line to protect the dog from angry bees! Use your creativity and timing to shield the dog and survive each level. Brain power and logic required to pass.",
+            "image": "assets/icons/Project2.png",
+            "video": "assets/videos/Project2.mp4",
+            "tags": [
+                "Unity",
+                "C#",
+                "2D",
+                "Puzzle",
+                "Hyper Casual"
+            ],
+            "playStoreUrl": "",
+            "appStoreUrl": ""
+        },
+        {
+            "id": "project-3",
+            "title": "Solitaire Infinite",
+            "type": "2D · Card Game",
+            "platform": "Android",
+            "engine": "Unity",
+            "status": "published",
+            "categories": [
+                "casual"
+            ],
+            "description": "Classic solitaire with intuitive drag-and-drop controls, undo options, and endless reshuffling. A smooth, relaxing experience for casual players and card game enthusiasts.",
+            "image": "assets/icons/Project3.jpg",
+            "video": "assets/videos/Project3.mp4",
+            "tags": [
+                "Unity",
+                "C#",
+                "2D",
+                "Card Game",
+                "Casual"
+            ],
+            "playStoreUrl": "",
+            "appStoreUrl": ""
+        },
+        {
+            "id": "project-4",
+            "title": "1000 Soldiers",
+            "type": "3D · Action Strategy",
+            "platform": "Android",
+            "engine": "Unity",
+            "status": "published",
+            "categories": [
+                "action",
+                "strategy"
+            ],
+            "description": "Strategic battle simulator — command an ever-growing army across vast lands, facing swarms of enemies and powerful bosses. Every decision counts in this epic-scale war game.",
+            "image": "assets/icons/Project4.png",
+            "video": "assets/videos/Project4.mp4",
+            "tags": [
+                "Unity",
+                "C#",
+                "3D",
+                "Strategy",
+                "Action",
+                "War Simulator"
+            ],
+            "playStoreUrl": "",
+            "appStoreUrl": ""
+        },
+        {
+            "id": "project-5",
+            "title": "Find the Difference",
+            "type": "2D · Puzzle",
+            "platform": "Android",
+            "engine": "Unity",
+            "status": "published",
+            "categories": [
+                "casual",
+                "puzzle"
+            ],
+            "description": "Designed & developed 300+ levels of engaging spot-the-difference puzzles. Integrated hint system, time-based challenges, and Google Play leaderboards. AdMob Ads & IAP for monetization.",
+            "image": "assets/icons/Project5.png",
+            "video": "assets/videos/Project5.mp4",
+            "tags": [
+                "Unity",
+                "C#",
+                "2D",
+                "Puzzle",
+                "Match Puzzle"
+            ],
+            "playStoreUrl": "",
+            "appStoreUrl": ""
+        },
+        {
+            "id": "project-6",
+            "title": "Traffic Jam – Puzzle Strategy Game",
+            "type": "3D · Logic / Strategy",
+            "platform": "Android",
+            "engine": "Unity",
+            "status": "published",
+            "categories": [
+                "casual",
+                "puzzle",
+                "strategy"
+            ],
+            "description": "A brain-training puzzle game where you strategically move and unblock buses stuck in traffic jams. Features hundreds of challenging puzzles to improve logic and planning skills.",
+            "image": "assets/icons/Project6.png",
+            "video": "assets/videos/Project6.mp4",
+            "tags": [
+                "Unity",
+                "C#",
+                "3D",
+                "Puzzle",
+                "Logic Game",
+                "Brain Training"
+            ],
+            "playStoreUrl": "",
+            "appStoreUrl": ""
+        },
+        {
+            "id": "project-7",
+            "title": "Word of the Word",
+            "type": "2D · Word Game",
+            "platform": "Android",
+            "engine": "Unity",
+            "status": "published",
+            "categories": [
+                "casual",
+                "puzzle",
+                "word"
+            ],
+            "description": "An anagram-based word game combining unscrambling jumbled letters with a crossword-style grid. Features daily challenges, progressive difficulty, and offline play support.",
+            "image": "assets/icons/Project7.jpeg",
+            "video": "assets/videos/Project7.mp4",
+            "tags": [
+                "Unity",
+                "C#",
+                "2D",
+                "Puzzle",
+                "Word Game",
+                "Brain Training"
+            ],
+            "playStoreUrl": "",
+            "appStoreUrl": ""
+        }
+    ]
+}
