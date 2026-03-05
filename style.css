@@ -1372,6 +1372,7 @@ footer::before {
         transform: translateX(100%);
         transition: transform 0.3s ease-in;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+        z-index: 999;
     }
 
     .nav-links.open {
@@ -1380,6 +1381,7 @@ footer::before {
 
     .burger {
         display: block;
+        z-index: 1001;
     }
 
     .burger.toggle .line1 {
@@ -1394,38 +1396,69 @@ footer::before {
         transform: rotate(45deg) translate(-5px, -6px);
     }
 
+    /* Hero */
+    .hero {
+        padding-top: 5rem;
+        padding-bottom: 3rem;
+        gap: 1rem;
+    }
+
     .hero h1 {
-        font-size: 3rem;
+        font-size: 2.8rem;
     }
 
     .hero h2 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
-    .contact-content {
-        grid-template-columns: 1fr;
+    .hero-description {
+        font-size: 1rem;
     }
 
-    .footer-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 2rem;
+    .achievements {
+        gap: 0.8rem;
+        justify-content: center;
     }
 
-    .footer-links {
+    .achievements span {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .cta-buttons {
         flex-wrap: wrap;
         justify-content: center;
     }
 
+    .profile-circle {
+        width: 260px;
+        height: 260px;
+        margin-top: 1rem;
+    }
+
+    .circle-bg {
+        width: 250px;
+        height: 250px;
+    }
+
+    /* Section spacing */
+    section {
+        padding: 60px 5%;
+    }
+
+    .skills {
+        padding: 60px 5%;
+    }
+
+    /* Skills */
     .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
         gap: 1rem;
     }
 
     .skill-card {
-        min-height: 120px;
-        padding: 1.2rem;
+        min-height: 110px;
+        padding: 1rem;
     }
 
     .skill-icon {
@@ -1433,25 +1466,14 @@ footer::before {
     }
 
     .skill-name {
-        font-size: 0.85rem;
+        font-size: 0.82rem;
     }
 
-    .profile-circle {
-        width: 280px;
-        height: 280px;
-        margin-top: 1rem;
-    }
-
-    .circle-bg {
-        width: 270px;
-        height: 270px;
-    }
-
+    /* Projects */
     .project-grid {
         grid-template-columns: 1fr;
     }
 
-    /* Convert horizontal cards to vertical on small screens */
     .project-card {
         flex-direction: column;
         min-height: unset;
@@ -1460,18 +1482,195 @@ footer::before {
     .project-media {
         width: 100%;
         height: 200px;
+        aspect-ratio: unset;
     }
 
     .project-info {
         padding: 1.2rem;
     }
 
+    /* Services */
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Contact */
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .contact-info h3 {
+        font-size: 1.4rem;
+    }
+
+    .contact-details {
+        padding: 1.2rem;
+        gap: 1rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 0.95rem;
+        padding: 0.9rem;
+    }
+
+    .submit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Footer */
+    .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .footer-info p {
+        max-width: 100%;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-contact-info p {
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* Testimonials */
     .testimonials-grid {
         grid-template-columns: 1fr;
     }
 
-    .hero {
-        padding-top: 5rem;
+    /* Section header */
+    section h2 {
+        font-size: 2rem;
+    }
+}
+
+/* =========================================
+   Extra small phones: 480px and below
+   ========================================= */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero h2 {
+        font-size: 1.1rem;
+    }
+
+    .profile-circle {
+        width: 220px;
+        height: 220px;
+    }
+
+    .circle-bg {
+        width: 210px;
+        height: 210px;
+    }
+
+    .achievements {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .center-button .cta-button {
+        padding: 0.8rem 1.8rem;
+        font-size: 1rem;
+    }
+
+    section h2 {
+        font-size: 1.8rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+    .section-description {
+        font-size: 0.95rem;
+    }
+
+    .skill-card {
+        min-height: 100px;
+        padding: 0.8rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.7rem;
+    }
+
+    .skill-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .skill-name {
+        font-size: 0.75rem;
+    }
+
+    .contact-details {
+        padding: 1rem;
+    }
+
+    .contact-item i {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .contact-item p {
+        font-size: 0.85rem;
+        word-break: break-all;
+    }
+
+    .service-card {
+        padding: 1.5rem 1.2rem;
+    }
+
+    footer {
+        padding: 3rem 5% 1.5rem;
+    }
+
+    .footer-info h3 {
+        font-size: 1.4rem;
+    }
+
+    #backToTop {
+        bottom: 20px;
+        right: 20px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.3rem;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .navbar {
+        padding: 0.9rem 4%;
     }
 }
 
