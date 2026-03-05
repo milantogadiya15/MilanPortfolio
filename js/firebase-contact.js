@@ -1,8 +1,6 @@
 // =============================================
 // Firebase Contact Form Integration
-// Replace the firebaseConfig below with your
-// actual config from Firebase Console >
-// Project Settings > Your Apps > Web App
+// Direct form capture - works on live sites
 // =============================================
 
 const firebaseConfig = {
@@ -15,74 +13,81 @@ const firebaseConfig = {
     measurementId: "G-5RDZXNM0XH"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+// Initialize Firebase safely
+let db = null;
+try {
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+    db = firebase.firestore();
+    console.log('[Firebase] Initialized successfully');
+} catch (e) {
+    console.error('[Firebase] Init error:', e);
+}
 
 // =============================================
-// Save message to Firebase Firestore
+// Save message directly to Firebase Firestore
 // =============================================
 function saveMessageToFirebase(msgData) {
-    return db.collection('messages').doc(msgData.id.toString()).set(msgData)
+    if (!db) {
+        console.error('[Firebase] Firestore not initialized');
+        return Promise.resolve();
+    }
+    return db.collection('messages')
+        .doc(msgData.id.toString())
+        .set(msgData)
         .then(() => {
-            console.log('[Firebase] Message saved to Firestore:', msgData.id);
+            console.log('[Firebase] ✅ Message saved:', msgData.name, '|', msgData.email);
         })
-        .catch((error) => {
-            console.error('[Firebase] Error saving message:', error);
+        .catch((err) => {
+            console.error('[Firebase] ❌ Save error:', err);
         });
 }
 
 // =============================================
-// Intercept form submission
-// Runs AFTER the existing obfuscated script.js handler
-// We watch localStorage for new messages
+// Intercept contact form directly
+// Collects form data and saves to Firebase
+// INDEPENDENT of localStorage / emailjs / existing scripts
 // =============================================
-(function () {
-    const STORAGE_KEY = 'portfolio_messages';
-    let lastKnownIds = new Set();
+document.addEventListener('DOMContentLoaded', function () {
+    const contactForm = document.querySelector('.contact-form');
+    if (!contactForm) return;
 
-    // Load initial IDs
-    function loadCurrentIds() {
+    contactForm.addEventListener('submit', function () {
+        // Read field values at the moment of submission
+        const name = (document.getElementById('name') || {}).value || '';
+        const email = (document.getElementById('email') || {}).value || '';
+        const subject = (document.getElementById('subject') || {}).value || '';
+        const message = (document.getElementById('message') || {}).value || '';
+
+        const trimName = name.trim();
+        const trimEmail = email.trim();
+        const trimMessage = message.trim();
+
+        // Only save if minimum required fields are filled
+        if (!trimName || !trimEmail || !trimMessage) return;
+
+        const msgData = {
+            id: Date.now().toString(),
+            name: trimName,
+            email: trimEmail,
+            subject: subject.trim() || 'Not specified',
+            message: trimMessage,
+            timestamp: Date.now(),
+            read: false
+        };
+
+        console.log('[Firebase] Saving message from:', trimName);
+        saveMessageToFirebase(msgData);
+
+        // Also sync into localStorage so admin panel sees it locally too
         try {
-            const data = localStorage.getItem(STORAGE_KEY);
-            const msgs = data ? JSON.parse(data) : [];
-            msgs.forEach(m => lastKnownIds.add(String(m.id)));
-        } catch (e) { }
-    }
-
-    // Check for new messages added to localStorage
-    function syncNewMessages() {
-        try {
-            const data = localStorage.getItem(STORAGE_KEY);
-            const msgs = data ? JSON.parse(data) : [];
-            msgs.forEach(msg => {
-                const msgId = String(msg.id);
-                if (!lastKnownIds.has(msgId)) {
-                    lastKnownIds.add(msgId);
-                    saveMessageToFirebase(msg);
-                }
-            });
-        } catch (e) { }
-    }
-
-    // Listen to localStorage changes and form submit
-    loadCurrentIds();
-
-    // Watch the contact form for submission
-    document.addEventListener('DOMContentLoaded', () => {
-        const contactForm = document.querySelector('.contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', () => {
-                // Wait a bit for the existing handler to save to localStorage
-                setTimeout(syncNewMessages, 1500);
-            });
-        }
+            const key = 'portfolio_messages';
+            const existing = JSON.parse(localStorage.getItem(key) || '[]');
+            existing.push(msgData);
+            localStorage.setItem(key, JSON.stringify(existing));
+        } catch (e) { /* ignore */ }
     });
 
-    // Also listen for storage events (cross-tab)
-    window.addEventListener('storage', (e) => {
-        if (e.key === STORAGE_KEY) {
-            syncNewMessages();
-        }
-    });
-})();
+    console.log('[Firebase] Contact form interceptor attached');
+});
